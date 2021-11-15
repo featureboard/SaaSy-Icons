@@ -1,6 +1,6 @@
-# Next.js Subscription Payments Starter
+# SaaSy Icons
 
-The all-in-one starter kit for high-performance SaaS applications.
+A demo SaaS application built on top of the Next.js Subscription Payments Starter project and a free icon project from one of the FeatureBoard founders ([@CoreyGinnivan](https://twitter.com/CoreyGinnivan)) - https://systemuicons.com/
 
 ## Features
 
@@ -8,7 +8,8 @@ The all-in-one starter kit for high-performance SaaS applications.
 - Powerful data access & management tooling on top of PostgreSQL with [Supabase](https://supabase.io/docs/guides/database)
 - Integration with [Stripe Checkout](https://stripe.com/docs/payments/checkout) and the [Stripe customer portal](https://stripe.com/docs/billing/subscriptions/customer-portal)
 - Automatic syncing of pricing plans and subscription statuses via [Stripe webhooks](https://stripe.com/docs/webhooks)
-
+- Plan management with [FeatureBoard](https://featureboard.app)
+ 
 ## Demo
 
 - https://subscription-payments.vercel.app/
