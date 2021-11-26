@@ -34,6 +34,9 @@ const Navbar = () => {
                                     <a className={s.link}>Users</a>
                                 </Link>
                             )}
+                            <Link href="/icons">
+                                <a className={s.link}>Icons</a>
+                            </Link>
                         </nav>
                     </div>
 

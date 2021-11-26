@@ -1,12 +1,12 @@
 {
-  "name": "nextjs-subscription-payments",
+  "name": "saasy-icons",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "stripe:listen": "stripe listen --forward-to=localhost:3000/api/webhooks --project-name=saas-starter"
+    "stripe:listen": "stripe listen --forward-to=localhost:3000/api/webhooks --project-name=saasy-icons"
   },
   "dependencies": {
     "@featureboard/js-sdk": "^0.8.0",
@@ -14,6 +14,7 @@
     "@featureboard/react-sdk": "^0.5.0",
     "@stripe/stripe-js": "1.21.1",
     "@supabase/supabase-js": "1.28.0",
+    "@tailwindcss/custom-forms": "^0.2.1",
     "classnames": "2.3.1",
     "next": "12.0.3",
     "react": "17.0.2",
@@ -21,7 +22,8 @@
     "react-merge-refs": "1.1.0",
     "stripe": "8.188.0",
     "swr": "1.0.1",
-    "tailwindcss": "2.2.19"
+    "tailwindcss": "2.2.19",
+    "typeface-roboto-mono": "^0.0.75"
   },
   "devDependencies": {
     "@types/node": "^16.11.7",

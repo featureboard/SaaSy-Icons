@@ -4,15 +4,15 @@ A demo SaaS application built on top of the Next.js Subscription Payments Starte
 
 ## Features
 
-- Secure user management and authentication with [Supabase](https://supabase.io/docs/guides/auth)
-- Powerful data access & management tooling on top of PostgreSQL with [Supabase](https://supabase.io/docs/guides/database)
-- Integration with [Stripe Checkout](https://stripe.com/docs/payments/checkout) and the [Stripe customer portal](https://stripe.com/docs/billing/subscriptions/customer-portal)
-- Automatic syncing of pricing plans and subscription statuses via [Stripe webhooks](https://stripe.com/docs/webhooks)
-- Plan management with [FeatureBoard](https://featureboard.app)
- 
+-   Secure user management and authentication with [Supabase](https://supabase.io/docs/guides/auth)
+-   Powerful data access & management tooling on top of PostgreSQL with [Supabase](https://supabase.io/docs/guides/database)
+-   Integration with [Stripe Checkout](https://stripe.com/docs/payments/checkout) and the [Stripe customer portal](https://stripe.com/docs/billing/subscriptions/customer-portal)
+-   Automatic syncing of pricing plans and subscription statuses via [Stripe webhooks](https://stripe.com/docs/webhooks)
+-   Plan management with [FeatureBoard](https://featureboard.app)
+
 ## Demo
 
-- https://subscription-payments.vercel.app/
+-   https://subscription-payments.vercel.app/
 
 [![Screenshot of demo](./public/demo.png)](https://subscription-payments.vercel.app/)
 
@@ -62,9 +62,9 @@ Finally, copy the `Signing secret` as we'll need that in the next step.
 
 To securely interact with Stripe, we need to add a few environment variables in the Vercel dashboard.
 
-- `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
-- `STRIPE_SECRET_KEY`
-- `STRIPE_WEBHOOK_SECRET_LIVE`
+-   `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
+-   `STRIPE_SECRET_KEY`
+-   `STRIPE_WEBHOOK_SECRET_LIVE`
 
 You can find the first two keys on the [API keys tab](https://dashboard.stripe.com/test/apikeys) in Stripe. The `STRIPE_WEBHOOK_SECRET_LIVE` is the `Signing secret` copied in the previous webhook configuration step.
 
@@ -86,12 +86,12 @@ Stripe Checkout currently supports pricing that bills a predefined amount at a s
 
 For example, you can create business models with different pricing tiers, e.g.:
 
-- Product 1: Hobby
-  - Price 1: 10 USD per month
-  - Price 2: 100 USD per year
-- Product 2: Freelancer
-  - Price 1: 20 USD per month
-  - Price 2: 200 USD per year
+-   Product 1: Hobby
+    -   Price 1: 10 USD per month
+    -   Price 2: 100 USD per year
+-   Product 2: Freelancer
+    -   Price 1: 20 USD per month
+    -   Price 2: 200 USD per year
 
 #### Generate test data with the Stripe CLI
 
@@ -171,3 +171,15 @@ npm run dev
 yarn
 yarn dev
 ```
+
+# What is System UIcons?
+
+System UIcons is a collection of open source icons designed for products and systems in mind. Each icon is on a 21x21 grid.
+
+Use the icons how you want, for free, and without any attribution.
+
+[https://systemuicons.com/](https://systemuicons.com/)
+
+# Looking for a React library of System UIcons?
+
+[Martin Zlámal](https://github.com/mrtnzlml) has created an awesome open source community icon group over at [System UIcons React](https://github.com/adeira/icons)

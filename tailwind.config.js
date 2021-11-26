@@ -1,5 +1,9 @@
 module.exports = {
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  purge: ["./src/**/*.html", './pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  variants: {
+    scale: ["responsive", "hover", "focus", "group-hover"],
+    backgroundColor: ["responsive", "hover", "focus", "focus-within"],
+  },
   theme: {
     extend: {
       maxWidth: {
@@ -46,7 +50,15 @@ module.exports = {
       },
       letterSpacing: {
         widest: '0.3em'
-      }
+      },
+      fontFamily: {
+        mono: [
+          "Roboto Mono, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace",
+        ],
+      },
+      scale: {
+        "200": "2",
+      },
     }
   }
-};
+}
