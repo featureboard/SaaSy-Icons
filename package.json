@@ -9,30 +9,32 @@
     "stripe:listen": "stripe listen --forward-to=localhost:3000/api/webhooks --project-name=saasy-icons"
   },
   "dependencies": {
-    "@featureboard/js-sdk": "^0.9.0",
-    "@featureboard/node-sdk": "^0.11.0",
-    "@featureboard/react-sdk": "^0.6.0",
-    "@stripe/stripe-js": "1.21.1",
-    "@supabase/supabase-js": "1.28.2",
+    "@featureboard/js-sdk": "^0.10.0-beta.1",
+    "@featureboard/node-sdk": "^0.12.0-beta.3",
+    "@featureboard/react-sdk": "^0.6.1-beta.1",
+    "@stripe/stripe-js": "1.22.0",
+    "@supabase/supabase-js": "1.29.1",
     "@tailwindcss/custom-forms": "^0.2.1",
     "classnames": "2.3.1",
-    "next": "12.0.4",
+    "next": "12.0.7",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-merge-refs": "1.1.0",
-    "stripe": "8.188.0",
-    "swr": "1.0.1",
-    "tailwindcss": "2.2.19",
-    "typeface-roboto-mono": "^0.0.75"
+    "stripe": "8.195.0",
+    "swr": "1.1.2",
+    "tailwindcss": "3.0.13",
+    "typeface-roboto-mono": "^1.1.13"
   },
   "devDependencies": {
-    "@types/node": "^16.11.10",
-    "@types/react": "^17.0.37",
-    "postcss": "8.3.11",
+    "@babel/core": "^7.16.7",
+    "@types/node": "^16.11.19",
+    "@types/react": "^17.0.38",
+    "autoprefixer": "^10.4.2",
+    "postcss": "8.4.5",
     "postcss-flexbugs-fixes": "5.0.2",
-    "postcss-preset-env": "6.7.0",
-    "prettier": "2.4.1",
-    "typescript": "^4.4.4"
+    "postcss-preset-env": "7.2.0",
+    "prettier": "2.5.1",
+    "typescript": "^4.5.4"
   },
   "prettier": {
     "arrowParens": "always",

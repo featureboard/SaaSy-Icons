@@ -1,15 +1,14 @@
 import {
-    EffectiveFeatureState,
     FeatureBoardClient,
-    FeatureBoardService,
     MemoryEffectiveFeatureStore,
+    createBrowserClient,
 } from '@featureboard/js-sdk'
-import { FeatureBoardProvider, useClient } from '@featureboard/react-sdk'
+import { FeatureBoardProvider } from '@featureboard/react-sdk'
 import 'assets/chrome-bug.css'
 import 'assets/main.css'
 import Layout from 'components/Layout'
 import { AppProps } from 'next/app'
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { UserContextProvider, useUser } from 'utils/useUser'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
@@ -45,35 +44,52 @@ function HydrateFeatureBoardClientProvider({
 }
 function ClientFeatureBoardProvider({ children }: React.PropsWithChildren<{}>) {
     const user = useUser()
-    // TODO init the client SDK with server feature state so no flash during hydration
-    const featureState: ReturnType<FeatureBoardClient['getEffectiveValues']> = (
-        window.__NEXT_DATA__ as any
-    ).featureboardState
+    const audiences = useMemo(
+        () => (user.user ? ['state-logged-in'] : []),
+        [user.user],
+    )
 
-    const audiences = user.user ? ['state-logged-in'] : []
-    const client = useClient({
-        apiKey: process.env.NEXT_PUBLIC_FEATUREBOARD_ENV_KEY!,
-        // Once the user is logged in, set the `state-logged-in` audience
-        audiences,
-        // FeatureBoard sample environment
-        api: {
-            ws: 'wss://client-ws.featureboard.dev',
-            http: 'https://client.featureboard.dev',
-        },
-        store: new MemoryEffectiveFeatureStore(featureState.effectiveValues),
+    const [client] = useState(() => {
+        const featureState: ReturnType<
+            FeatureBoardClient['getEffectiveValues']
+        > = (window.__NEXT_DATA__ as any).featureboardState
+
+        return createBrowserClient({
+            environmentApiKey: process.env.NEXT_PUBLIC_FEATUREBOARD_ENV_KEY!,
+            // Once the user is logged in, set the `state-logged-in` audience
+            audiences,
+            // FeatureBoard sample environment
+            api: {
+                ws: 'wss://client-ws.featureboard.dev',
+                http: 'https://client.featureboard.dev',
+            },
+            store: new MemoryEffectiveFeatureStore(
+                featureState.effectiveValues,
+            ),
+        })
     })
 
+    useDidUpdateEffect(() => {
+        client.updateAudiences(audiences)
+    }, [audiences])
+
     return (
-        <FeatureBoardProvider
-            client={
-                client.client ||
-                FeatureBoardService.initStatic(
-                    featureState.audiences,
-                    featureState.effectiveValues,
-                )
-            }
-        >
+        <FeatureBoardProvider client={client.client}>
             {children}
         </FeatureBoardProvider>
     )
+}
+
+function useDidUpdateEffect(
+    effect: React.EffectCallback,
+    deps?: React.DependencyList,
+) {
+    const didMountRef = useRef(false)
+
+    useEffect(() => {
+        if (didMountRef.current) {
+            return effect()
+        }
+        didMountRef.current = true
+    }, deps)
 }

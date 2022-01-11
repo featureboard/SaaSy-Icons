@@ -7,12 +7,12 @@ import Document, {
     DocumentInitialProps,
 } from 'next/document'
 import { FeatureBoardClient } from '@featureboard/js-sdk'
-import { FeatureBoardService, ServerConnection } from '@featureboard/node-sdk'
+import { createServerClient, ServerClient } from '@featureboard/node-sdk'
 import { FeatureBoardProvider } from '@featureboard/react-sdk'
 import { AppType } from 'next/dist/shared/lib/utils'
 import React from 'react'
 
-let serverConnection: Promise<ServerConnection>
+let serverClient: ServerClient
 
 type DocumentProps = DocumentInitialProps & {
     featureboardState: ReturnType<FeatureBoardClient['getEffectiveValues']>
@@ -37,24 +37,23 @@ class MyDocument extends Document<DocumentProps> {
     static async getInitialProps(ctx: DocumentContext) {
         const originalRenderPage = ctx.renderPage
 
-        if (!serverConnection) {
+        if (!serverClient) {
             if (!process.env.NEXT_PUBLIC_FEATUREBOARD_ENV_KEY) {
                 throw new Error('NEXT_PUBLIC_FEATUREBOARD_ENV_KEY missing')
             }
-            serverConnection = FeatureBoardService.init(
-                process.env.NEXT_PUBLIC_FEATUREBOARD_ENV_KEY,
-                {
-                    updateStrategy: 'on-request',
-                    // FeatureBoard sample environment
-                    api: {
-                        ws: 'wss://client-ws.featureboard.dev',
-                        http: 'https://client.featureboard.dev',
-                    },
+            serverClient = createServerClient({
+                environmentApiKey: process.env.NEXT_PUBLIC_FEATUREBOARD_ENV_KEY,
+                updateStrategy: 'on-request',
+                // FeatureBoard sample environment
+                api: {
+                    ws: 'wss://client-ws.featureboard.dev',
+                    http: 'https://client.featureboard.dev',
                 },
-            )
+            })
+            await serverClient.waitForInitialised()
         }
 
-        const requestClient = await (await serverConnection).request([])
+        const requestClient = await serverClient.request([])
 
         ctx.renderPage = () =>
             originalRenderPage({
