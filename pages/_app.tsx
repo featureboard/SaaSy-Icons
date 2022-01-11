@@ -1,13 +1,16 @@
-import { useEffect } from 'react'
-import 'assets/main.css'
+import {
+    EffectiveFeatureState,
+    FeatureBoardClient,
+    FeatureBoardService,
+    MemoryEffectiveFeatureStore,
+} from '@featureboard/js-sdk'
+import { FeatureBoardProvider, useClient } from '@featureboard/react-sdk'
 import 'assets/chrome-bug.css'
-import React from 'react'
-
+import 'assets/main.css'
 import Layout from 'components/Layout'
-import { UserContextProvider } from 'utils/useUser'
 import { AppProps } from 'next/app'
-import { FeatureBoardClient, FeatureBoardService } from '@featureboard/js-sdk'
-import { FeatureBoardProvider } from '@featureboard/react-sdk'
+import React, { useEffect } from 'react'
+import { UserContextProvider, useUser } from 'utils/useUser'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
     useEffect(() => {
@@ -16,13 +19,13 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
     return (
         <div className="bg-primary">
-            <HydrateFeatureBoardClientProvider>
-                <UserContextProvider>
+            <UserContextProvider>
+                <HydrateFeatureBoardClientProvider>
                     <Layout>
                         <Component {...pageProps} />
                     </Layout>
-                </UserContextProvider>
-            </HydrateFeatureBoardClientProvider>
+                </HydrateFeatureBoardClientProvider>
+            </UserContextProvider>
         </div>
     )
 }
@@ -33,21 +36,44 @@ function HydrateFeatureBoardClientProvider({
     children: React.ReactNode
 }) {
     if (typeof window !== 'undefined') {
-        const featureState: ReturnType<
-            FeatureBoardClient['getEffectiveValues']
-        > = (window.__NEXT_DATA__ as any).featureboardState
-
         return (
-            <FeatureBoardProvider
-                client={FeatureBoardService.initStatic(
-                    featureState.audiences,
-                    featureState.effectiveValues,
-                )}
-            >
-                {children}
-            </FeatureBoardProvider>
+            <ClientFeatureBoardProvider>{children}</ClientFeatureBoardProvider>
         )
     }
 
     return <>{children}</>
+}
+function ClientFeatureBoardProvider({ children }: React.PropsWithChildren<{}>) {
+    const user = useUser()
+    // TODO init the client SDK with server feature state so no flash during hydration
+    const featureState: ReturnType<FeatureBoardClient['getEffectiveValues']> = (
+        window.__NEXT_DATA__ as any
+    ).featureboardState
+
+    const audiences = user.user ? ['state-logged-in'] : []
+    const client = useClient({
+        apiKey: process.env.NEXT_PUBLIC_FEATUREBOARD_ENV_KEY!,
+        // Once the user is logged in, set the `state-logged-in` audience
+        audiences,
+        // FeatureBoard sample environment
+        api: {
+            ws: 'wss://client-ws.featureboard.dev',
+            http: 'https://client.featureboard.dev',
+        },
+        store: new MemoryEffectiveFeatureStore(featureState.effectiveValues),
+    })
+
+    return (
+        <FeatureBoardProvider
+            client={
+                client.client ||
+                FeatureBoardService.initStatic(
+                    featureState.audiences,
+                    featureState.effectiveValues,
+                )
+            }
+        >
+            {children}
+        </FeatureBoardProvider>
+    )
 }

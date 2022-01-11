@@ -1,8 +1,16 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
+import ErrorPage from 'next/error'
 import { icons } from '../utils/data'
+import { useFeature } from '@featureboard/react-sdk'
 
 export function IconsPage() {
     const [searchText, setSearchText] = useState('')
+    const iconAccess = useFeature('limit-icon-access', false)
+
+    if (!iconAccess) {
+        return <ErrorPage statusCode={404} />
+    }
+
     return (
         <>
             <main className="flex-grow">
@@ -214,12 +222,7 @@ export function IconsPage() {
                         .map((icon) => (
                             <a
                                 href={
-                                    document.location.protocol +
-                                    '//' +
-                                    document.location.host +
-                                    `/images/icons/` +
-                                    icon.icon_path +
-                                    `.svg`
+                                    `/images/icons/` + icon.icon_path + `.svg`
                                 }
                                 // x-bind:download="downloadType === 'download-svg' && item.icon_name"
                                 className="relative bg-white flex flex-col items-center justify-center h-32 p-2 text-gray-700 transition duration-150 ease-in-out rounded shadow cursor-pointer group hover:shadow-xl md:h-40"

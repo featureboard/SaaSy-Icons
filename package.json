@@ -9,14 +9,14 @@
     "stripe:listen": "stripe listen --forward-to=localhost:3000/api/webhooks --project-name=saasy-icons"
   },
   "dependencies": {
-    "@featureboard/js-sdk": "^0.8.0",
-    "@featureboard/node-sdk": "^0.10.0",
-    "@featureboard/react-sdk": "^0.5.0",
+    "@featureboard/js-sdk": "^0.9.0",
+    "@featureboard/node-sdk": "^0.11.0",
+    "@featureboard/react-sdk": "^0.6.0",
     "@stripe/stripe-js": "1.21.1",
-    "@supabase/supabase-js": "1.28.0",
+    "@supabase/supabase-js": "1.28.2",
     "@tailwindcss/custom-forms": "^0.2.1",
     "classnames": "2.3.1",
-    "next": "12.0.3",
+    "next": "12.0.4",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-merge-refs": "1.1.0",
@@ -26,8 +26,8 @@
     "typeface-roboto-mono": "^0.0.75"
   },
   "devDependencies": {
-    "@types/node": "^16.11.7",
-    "@types/react": "^17.0.34",
+    "@types/node": "^16.11.10",
+    "@types/react": "^17.0.37",
     "postcss": "8.3.11",
     "postcss-flexbugs-fixes": "5.0.2",
     "postcss-preset-env": "6.7.0",

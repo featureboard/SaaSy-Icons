@@ -38,13 +38,14 @@ class MyDocument extends Document<DocumentProps> {
         const originalRenderPage = ctx.renderPage
 
         if (!serverConnection) {
-            if (!process.env.FEATUREBOARD_ENV_KEY) {
-                throw new Error('FEATUREBOARD_ENV_KEY missing')
+            if (!process.env.NEXT_PUBLIC_FEATUREBOARD_ENV_KEY) {
+                throw new Error('NEXT_PUBLIC_FEATUREBOARD_ENV_KEY missing')
             }
             serverConnection = FeatureBoardService.init(
-                process.env.FEATUREBOARD_ENV_KEY,
+                process.env.NEXT_PUBLIC_FEATUREBOARD_ENV_KEY,
                 {
                     updateStrategy: 'on-request',
+                    // FeatureBoard sample environment
                     api: {
                         ws: 'wss://client-ws.featureboard.dev',
                         http: 'https://client.featureboard.dev',

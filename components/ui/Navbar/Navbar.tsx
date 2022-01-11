@@ -8,6 +8,7 @@ import { useFeature } from '@featureboard/react-sdk'
 const Navbar = () => {
     const { user, signOut } = useUser()
     const userLimit = useFeature('user-limit', 1)
+    const iconAccess = useFeature('limit-icon-access', false)
 
     return (
         <nav className={s.root}>
@@ -34,9 +35,11 @@ const Navbar = () => {
                                     <a className={s.link}>Users</a>
                                 </Link>
                             )}
-                            <Link href="/icons">
-                                <a className={s.link}>Icons</a>
-                            </Link>
+                            {iconAccess && (
+                                <Link href="/icons">
+                                    <a className={s.link}>Icons</a>
+                                </Link>
+                            )}
                         </nav>
                     </div>
 

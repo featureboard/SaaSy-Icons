@@ -70,5 +70,6 @@ export interface Subscription {
 declare module '@featureboard/js-sdk' {
     interface Features {
         'user-limit': number
+        'limit-icon-access': boolean
     }
 }
