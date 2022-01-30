@@ -4,8 +4,8 @@ import {
     createBrowserClient,
 } from '@featureboard/js-sdk'
 import { FeatureBoardProvider } from '@featureboard/react-sdk'
-import 'assets/chrome-bug.css'
-import 'assets/main.css'
+import 'styles/main.css'
+import 'styles/chrome-bug.css'
 import Layout from 'components/Layout'
 import { AppProps } from 'next/app'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
@@ -17,7 +17,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     }, [])
 
     return (
-        <div className="bg-primary">
+        <div className="bg-black">
             <UserContextProvider>
                 <HydrateFeatureBoardClientProvider>
                     <Layout>
