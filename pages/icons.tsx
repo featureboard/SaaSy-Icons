@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import ErrorPage from 'next/error'
 import { icons } from '../utils/data'
-import { useFeature } from '@featureboard/react-sdk'
 
 export function IconsPage() {
     const [searchText, setSearchText] = useState('')
-    const iconAccess = useFeature('limit-icon-access', false)
+    const iconAccess = true
 
     if (!iconAccess) {
         return <ErrorPage statusCode={404} />
@@ -13,12 +12,12 @@ export function IconsPage() {
 
     return (
         <>
-            <main className="flex-grow">
-                <div className="flex flex-row items-center px-4 py-4 mt-4 md:px-6 lg:px-8 md:mt-6 lg:mt-8">
+            <main className="flex-grow bg-zinc-900">
+                <div className="flex flex-row items-center px-4 py-4 md:px-6 lg:px-8">
                     <svg
                         viewBox="0 0 21 21"
                         xmlns="http://www.w3.org/2000/svg"
-                        className="w-6 h-6 mr-4 md:w-7 lg:w-12 md:h-7 lg:h-12"
+                        className="w-6 h-6 mr-2 md:w-7 lg:w-12 md:h-7 lg:h-12 text-zinc-700"
                     >
                         <g
                             fill="none"
@@ -42,15 +41,12 @@ export function IconsPage() {
                         autoComplete="off"
                         autoCorrect="off"
                         spellCheck="false"
-                        className="flex flex-1 w-full text-xl tracking-tighter text-black placeholder-gray-400 appearance-none focus:outline-none focus:text-black lg:text-3xl xl:text-5xl"
+                        className="flex flex-1 bg-zinc-900 w-full text-xl tracking-tighter text-black placeholder-zinc-600 appearance-none focus:outline-none focus:ring-transparent rounded-lg focus:bg-zinc-800 px-4 focus:text-white lg:text-3xl xl:text-5xl"
                     />
                 </div>
                 <div className="sticky top-0 z-10 flex flex-col px-4 py-4 space-y-2 border-t border-gray-300 md:space-y-0 md:flex-row md:px-6 lg:px-8">
-                    <div className="flex flex-col p-1 space-x-0 space-y-1 bg-gray-200 rounded md:flex-row md:space-x-1 md:space-y-0">
-                        <label
-                            className="inline-flex flex-no-wrap items-center w-full h-full px-2 py-2 text-sm transition duration-200 rounded cursor-pointer lg:text-base hover:bg-gray-100 hover:text-black md:w-auto md:py-0"
-                            // :class="downloadType === 'copy-svg' ? 'shadow' : 'text-gray-600'"
-                        >
+                    <div className="flex flex-col p-1 space-x-0 space-y-1 bg-zinc-800 rounded md:flex-row md:space-x-1 md:space-y-0">
+                        <label className="inline-flex flex-no-wrap items-center w-full h-full px-2 py-2 text-sm transition duration-200 rounded cursor-pointer lg:text-base bg-zinc-800 hover:bg-zinc-700 text-white md:w-auto md:py-0">
                             <input
                                 type="radio"
                                 className="hidden"
@@ -96,7 +92,7 @@ export function IconsPage() {
                             </span>
                         </label>
                         <label
-                            className="inline-flex flex-no-wrap items-center w-full h-full px-2 py-2 text-sm transition duration-200 rounded cursor-pointer lg:text-base hover:bg-gray-100 hover:text-black md:w-auto md:py-0"
+                            className="inline-flex flex-no-wrap items-center w-full h-full px-2 py-2 text-sm transition duration-200 rounded cursor-pointer lg:text-base bg-zinc-800 hover:bg-zinc-700 text-white md:w-auto md:py-0"
                             // :class="downloadType === 'copy-cdn' ? 'shadow' : 'text-gray-600'"
                         >
                             <input
@@ -134,7 +130,7 @@ export function IconsPage() {
                             </span>
                         </label>
                         <label
-                            className="inline-flex flex-no-wrap items-center w-full h-full px-2 py-2 text-sm transition duration-200 rounded cursor-pointer lg:text-base hover:bg-gray-100 hover:text-black md:w-auto md:py-0"
+                            className="inline-flex flex-no-wrap items-center w-full h-full px-2 py-2 text-sm transition duration-200 rounded cursor-pointer lg:text-base bg-zinc-800 hover:bg-zinc-700 text-white md:w-auto md:py-0"
                             // :class="downloadType === 'download-svg' ? 'shadow' : 'text-gray-600'"
                         >
                             <input
@@ -175,7 +171,7 @@ export function IconsPage() {
                     </div>
                     <a
                         href="images/System UIcons.zip"
-                        className="flex flex-row items-center w-full p-3 ml-auto text-sm text-white bg-black rounded lg:text-base hover:bg-gray-900 md:w-auto"
+                        className="flex flex-row items-center w-full p-3 ml-auto text-sm text-black bg-white rounded lg:text-base hover:bg-white/90 md:w-auto"
                         download
                     >
                         <span className="mr-2">
@@ -226,7 +222,7 @@ export function IconsPage() {
                                     `/images/icons/` + icon.icon_path + `.svg`
                                 }
                                 // x-bind:download="downloadType === 'download-svg' && item.icon_name"
-                                className="relative bg-white flex flex-col items-center justify-center h-32 p-2 text-gray-700 transition duration-150 ease-in-out rounded shadow cursor-pointer group hover:shadow-xl md:h-40"
+                                className="relative bg-zinc-800 text-white hover:bg-zinc-700 flex flex-col items-center justify-center h-32 p-2 transition duration-150 ease-in-out rounded shadow cursor-pointer group hover:shadow-xl md:h-40"
                                 // @click="handleClick(item, downloadType, $event, $dispatch)"
                             >
                                 {/* <div>
@@ -259,10 +255,10 @@ export function IconsPage() {
                                     src={`/icons/${icon.icon_path}.svg`}
                                     // :src="`images/icons/` + item.icon_path + `.svg`"
                                     // :alt="item.icon_name"
-                                    className="transition duration-200 transform group-hover:scale-200"
+                                    className="transition duration-200 text-inherit transform group-hover:scale-200"
                                     loading="lazy"
                                 />
-                                <p className="mt-4 text-xs leading-none tracking-tight text-center text-gray-600 md:mt-8">
+                                <p className="mt-4 text-xs leading-none tracking-tight text-center text-zinc-400 md:mt-8">
                                     {icon.icon_name}
                                 </p>
                                 <span className="hidden">
@@ -280,22 +276,6 @@ export function IconsPage() {
                     </div>
                 </div>
             </main>
-            <footer className="flex flex-col py-8 mx-8 space-y-4 text-gray-700 border-t border-gray-300 md:space-y-0 md:flex-row">
-                <span>
-                    Project by
-                    <a
-                        href="https://twitter.com/CoreyGinnivan"
-                        rel="noreferrer"
-                        target="_blank"
-                        className="text-black hover:underline"
-                    >
-                        Corey Ginnivan
-                    </a>
-                </span>
-                <span className="md:ml-auto">
-                    Use how you want, without attribution
-                </span>
-            </footer>
         </>
     )
 }

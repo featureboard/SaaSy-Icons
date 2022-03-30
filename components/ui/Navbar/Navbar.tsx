@@ -4,6 +4,7 @@ import s from './Navbar.module.css'
 import Logo from 'components/icons/Logo'
 import { useUser } from 'utils/useUser'
 import { useFeature } from '@featureboard/react-sdk'
+import classNames from 'classnames'
 
 const Navbar = () => {
     const { user, signOut } = useUser()
@@ -12,38 +13,16 @@ const Navbar = () => {
 
     return (
         <nav className={s.root}>
-            <a href="#skip" className="sr-only focus:not-sr-only">
-                Skip to content
-            </a>
-            <div className="mx-auto max-w-6xl px-6">
+            <div className="mx-auto px-6 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
                 <div className="flex justify-between align-center flex-row py-4 md:py-6 relative">
                     <div className="flex flex-1 items-center">
-                        <Link href="/">
-                            <a className={s.logo} aria-label="Logo">
-                                <Logo />
-                            </a>
-                        </Link>
-                        <nav className="space-x-2 ml-6 hidden lg:block">
-                            <Link href="/">
-                                <a className={s.link}>Pricing</a>
-                            </Link>
-                            <Link href="/account">
-                                <a className={s.link}>Account</a>
-                            </Link>
-                            {userLimit > 1 && (
-                                <Link href="/users">
-                                    <a className={s.link}>Users</a>
-                                </Link>
-                            )}
-                            {iconAccess && (
-                                <Link href="/icons">
-                                    <a className={s.link}>Icons</a>
-                                </Link>
-                            )}
-                        </nav>
+                        <p>
+                            Subscribe to get access to all the Pro icons and
+                            much much more!
+                        </p>
                     </div>
 
-                    <div className="flex flex-1 justify-end space-x-8">
+                    <div className="flex flex-1 justify-end space-x-4">
                         {user ? (
                             <Link href="#">
                                 <a className={s.link} onClick={() => signOut()}>
@@ -51,9 +30,18 @@ const Navbar = () => {
                                 </a>
                             </Link>
                         ) : (
-                            <Link href="/signin">
-                                <a className={s.link}>Sign in</a>
-                            </Link>
+                            <>
+                                <Link href="/signin">
+                                    <a className="flex items-center justify-center px-4 border-2 border-white bg-white rounded-lg text-black font-semibold hover:text-white hover:bg-white/0 duration-150 ease-in-out py-2 transition">
+                                        Subscribe to Pro for $3/m
+                                    </a>
+                                </Link>
+                                <Link href="/signin">
+                                    <a className="flex items-center justify-center px-4 bg-transparent rounded-lg text-white font-semibold hover:text-black hover:bg-white/100 duration-150 ease-in-out py-2 transition">
+                                        Sign in
+                                    </a>
+                                </Link>
+                            </>
                         )}
                     </div>
                 </div>
