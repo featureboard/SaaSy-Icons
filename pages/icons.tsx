@@ -44,7 +44,7 @@ export function IconsPage() {
                         className="flex flex-1 bg-zinc-900 w-full text-xl tracking-tighter text-black placeholder-zinc-600 appearance-none focus:outline-none focus:ring-transparent rounded-lg focus:bg-zinc-800 px-4 focus:text-white lg:text-3xl xl:text-5xl"
                     />
                 </div>
-                <div className="sticky top-0 z-10 flex flex-col px-4 py-4 space-y-2 border-t border-gray-300 md:space-y-0 md:flex-row md:px-6 lg:px-8">
+                <div className="sticky top-0 z-10 flex flex-col px-4 py-4 space-y-2 border-t border-zinc-800 md:space-y-0 md:flex-row md:px-6 lg:px-8">
                     <div className="flex flex-col p-1 space-x-0 space-y-1 bg-zinc-800 rounded md:flex-row md:space-x-1 md:space-y-0">
                         <label className="inline-flex flex-no-wrap items-center w-full h-full px-2 py-2 text-sm transition duration-200 rounded cursor-pointer lg:text-base bg-zinc-800 hover:bg-zinc-700 text-white md:w-auto md:py-0">
                             <input
@@ -171,7 +171,7 @@ export function IconsPage() {
                     </div>
                     <a
                         href="images/System UIcons.zip"
-                        className="flex flex-row items-center w-full p-3 ml-auto text-sm text-black bg-white rounded lg:text-base hover:bg-white/90 md:w-auto"
+                        className="flex flex-row items-center w-full p-3 ml-auto text-sm text-white rounded lg:text-base hover:bg-zinc-800 md:w-auto"
                         download
                     >
                         <span className="mr-2">
